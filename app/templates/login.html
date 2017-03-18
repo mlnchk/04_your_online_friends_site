@@ -1,34 +1,45 @@
 <!-- extend base layout -->
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>vk friends</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     </head>
     <body>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        <h1>Sign In</h1>
-        <form action="" method="post" name="login">
-            {{ form.hidden_tag() }}
-            <p>
-                Please enter your OpenID, or select one of the providers below:<br>
-                {{ form.openid(size=80) }}
-                {% for error in form.openid.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}<br>
-            </p>
-            <p><input type="submit" value="Sign In"></p>
-        </form>
-        {% for post in a %}
-        <p>
-          {{ post }}
-        </p>
-        {% endfor %}
+        <div class="wrapper">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <h1>friends VK online</h1>
+            <form action="" method="post" name="login">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.openid(size=100, placeholder="enter vk id") }}
+                    {% for error in form.openid.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}<br>
+                </p>
+                <p><input type="submit" value="Sign In"></p>
+            </form>
+            <div class="res">
+                {% for post in a %}
+                <p class="person">
+                  <a target="_blank" href="{{ post[0] }}">
+                    <img src="{{ post[2] }}" alt="">
+                    <span>{{ post[1] }}</span>
+                  </a>
+                </p>
+                {% endfor %}
+            </div>
+        </div>
     </body>
 </html>

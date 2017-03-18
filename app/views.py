@@ -11,7 +11,8 @@ def index():
     if form.validate_on_submit():
         flash('Login requested for OpenID="%s"' %
               form.openid.data)
-        a = get_all(form.openid.data)
+        l, n, p = get_all(form.openid.data)
+        a = zip(l, n, p)
         # return redirect('/login')
         return render_template('login.html', title='fuck', form=form, a=a)
     return render_template('login.html',

@@ -22,7 +22,8 @@ def get_all(search):
     #     search = sys.argv[1]
 
     params = {
-        'access_token': token
+        'access_token': token,
+        'fields': 'photo_50'
     }
 
     if type(search) == str:
@@ -37,9 +38,26 @@ def get_all(search):
 
     params['user_ids'] = ', '.join(map(str, id_lst))
     all = []
+    links = []
+    names2 = []
+    photos = []
     names = json.loads(requests.get(api_url + method, params).text)['response']
     for name in names:
         # print('vk.com/id' + str(name['uid']), '\t', name['first_name'], name['last_name'])
-        a = 'vk.com/id%s %s %s' % (str(name['uid']), name['first_name'], name['last_name'])
-        all.append(a)
-    return all
+        # a = 'vk.com/id%s %s %s' % (str(name['uid']), name['first_name'], name['last_name'])
+        a = 'https://vk.com/id%s' % name['uid']
+        b = '%s %s' % (name['first_name'], name['last_name'])
+        c = name['photo_50']
+        links.append(a)
+        names2.append(b)
+        photos.append(c)
+    # all = zip(links, names)
+    print(photos)
+    return links, names2, photos
+
+# l, n = get_all('lanaed')
+# print(l)
+# print(n)
+#
+# for i in zip(l, n):
+#     print(i)
