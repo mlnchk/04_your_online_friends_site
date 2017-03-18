@@ -1,31 +1,45 @@
 import requests
 import json
+import sys
 import time
 from auth import get_access_token
 
-api_url = 'https://api.vk.com/method/'
-method = 'users.get'
-method2 = 'friends.getOnline'
-print('enter url from stroke')
-# token = get_access_token()
-token = 'f979098f3038b62932ce627dce17417204e39bf50890ae7a4c8eef6f83327dca3c49c26ea0b3182a9fa5e'
-print('enter your id/domain')
-# search = input()
-search = 30026908
 
-params = {
-    'access_token': token,
-    'user_ids': search
-}
+def get_all(search):
+    api_url = 'https://api.vk.com/method/'
+    method = 'users.get'
+    method2 = 'friends.getOnline'
+    # print('enter url from address stroke')
+    # time.sleep(3)
+    # token = get_access_token()
+    token = 'ba92a5ba3a4ff5ddc0db20664bf2e51b80e6e7667ac63b0652e3dc2dcb1e8a919707e0482faeb91833617'
 
-find = json.loads(requests.get(api_url + method, params).text)['response'][0]['uid']
+    # if len(sys.argv) == 1:
+    #     # print('enter id/domain')
+    #     search = 30026908
+    #     # search = input()
+    # else:
+    #     search = sys.argv[1]
 
-params['user_id'] = find
-id_lst = json.loads(requests.get(api_url + method2, params).text)['response']
-print('Friends online: \n')
-# for ids in id_lst:
-#     print('vk.com/id' + str(ids))
-params['user_ids'] = str(id_lst)[1:-1]
-names = json.loads(requests.get(api_url + method, params).text)['response']
-for name in names:
-    print('vk.com/id' + str(name['uid']), '\t', name['first_name'], name['last_name'])
+    params = {
+        'access_token': token
+    }
+
+    if type(search) == str:
+        params['user_ids'] = search
+        find = json.loads(requests.get(api_url + method, params).text)['response'][0]['uid']
+        params['user_id'] = find
+    else:
+        params['user_id'] = search
+
+    id_lst = json.loads(requests.get(api_url + method2, params).text)['response']
+    # print('Friends online: \n')
+
+    params['user_ids'] = ', '.join(map(str, id_lst))
+    all = []
+    names = json.loads(requests.get(api_url + method, params).text)['response']
+    for name in names:
+        # print('vk.com/id' + str(name['uid']), '\t', name['first_name'], name['last_name'])
+        a = 'vk.com/id%s %s %s' % (str(name['uid']), name['first_name'], name['last_name'])
+        all.append(a)
+    return all

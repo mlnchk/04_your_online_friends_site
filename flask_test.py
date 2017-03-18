@@ -1,10 +1,14 @@
 from flask import Flask
+import subprocess
+
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    reply = subprocess.run(["python3", "friends_online.py", "70412660"], stdout=subprocess.PIPE)
+    return reply.stdout
 
 
 @app.route('/fuck')
