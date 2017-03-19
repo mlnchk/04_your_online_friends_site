@@ -28,6 +28,7 @@ a{
 	overflow : scroll;
 	margin: 0 auto;
 	clear: both;
+	overflow-x: hidden;
 }
 
 .res p{

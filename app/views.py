@@ -1,7 +1,7 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash
 from app import app
 from .forms import LoginForm
-from friends_online import get_all
+from test import get_all
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -9,11 +9,8 @@ from friends_online import get_all
 def index():
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Login requested for OpenID="%s"' %
-              form.openid.data)
-        l, n, p = get_all(form.openid.data)
-        a = zip(l, n, p)
-        # return redirect('/login')
+        flash('Login requested for OpenID="%s"' % form.openid.data)
+        a = get_all(form.openid.data)
         return render_template('login.html', title='fuck', form=form, a=a)
     return render_template('login.html',
                            title='Sign In',
