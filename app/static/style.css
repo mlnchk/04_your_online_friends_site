@@ -15,14 +15,46 @@ a{
 	text-decoration: none;
 }
 
+p{
+	padding: 0;
+	margin: 0;
+}
+
 .wrapper{
+	box-sizing: border-box;
 	height: 100vh;
+	background: #45688E;
+	padding-top: 15vh;
+}
+
+#openid{
+	font-size: 20px;
+	height: 50px;
+	width: 80vw;
+	border: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+}
+
+.search{
+	font-size: 20px;
+	height: 50px;
+	width: 80vw;
+	background: #305075;
+	color: #fff;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.search:hover{
 	background: #45688E;
 }
 
 .res{
 	/*padding: 10px;*/
-	height: 200px;
+	max-height: 36vh;
 	width: 80vw;
 	background: #fff;
 	overflow : scroll;
@@ -31,17 +63,13 @@ a{
 	overflow-x: hidden;
 }
 
-.res p{
-	/*text-align: left;*/
-}
-
 .person{
-	padding-top: 20px;
+	padding-top: 15px;
 	box-sizing: border-box;
 	border-bottom: 1px #e7e8ec solid;
 	border-right: 1px #e7e8ec solid;
 	display: block;
-	height: 50%;
+	height: 80px;
 	width: 33.33333333%;
 	float: left;
 	text-align: left;
@@ -61,4 +89,16 @@ a{
 
 .person:nth-child(3n){
 	border-right: none;
+}
+
+@media (max-width: 768px){
+	.person{
+		width: 50%;
+	}
+}
+
+@media (max-width: 500px){
+	.person{
+		width: 100%;
+	}
 }

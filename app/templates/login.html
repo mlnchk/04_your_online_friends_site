@@ -22,13 +22,12 @@
             <h1>friends VK online</h1>
             <form action="" method="post" name="login">
                 {{ form.hidden_tag() }}
-                <p>
-                    {{ form.openid(size=100, placeholder="enter vk id") }}
-                    {% for error in form.openid.errors %}
+                <p class="input-field">
+                    {{ form.openid(size=0, placeholder="enter vk id") }}
+                    <!-- {% for error in form.openid.errors %}
                         <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}<br>
-                </p>
-                <p><input type="submit" value="Sign In"></p>
+                    {% endfor %}<br> -->
+                <input class="search" type="submit" value="search"></p>
             </form>
             <div class="res">
                 {% for post in a %}

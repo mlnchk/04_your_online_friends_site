@@ -1,7 +1,7 @@
 from flask import render_template, flash
 from app import app
 from .forms import LoginForm
-from test import get_all
+from friends_online import get_all
 
 
 @app.route('/', methods=['GET', 'POST'])
